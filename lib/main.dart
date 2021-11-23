@@ -6,6 +6,6 @@ import './login.dart';
 void main() => runApp(
       const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashRoute(),
+        home: LoginRoute(),
       ),
     );
