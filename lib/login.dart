@@ -43,7 +43,7 @@ class LoginRoute extends StatelessWidget {
                 Container(
                   height: size.height * 0.1,
                   width: size.width,
-                  margin: const EdgeInsets.only(right: 20),
+                  margin: const EdgeInsets.only(right: 20, top: 10),
                   child: const Text(
                     "Login",
                     textAlign: TextAlign.right,
