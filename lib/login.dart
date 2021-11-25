@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginRoute extends StatelessWidget {
+class LoginRoute extends StatefulWidget {
   const LoginRoute({Key? key}) : super(key: key);
 
+  @override
+  _LoginRouteState createState() => _LoginRouteState();
+}
+
+class _LoginRouteState extends State<LoginRoute> {
+  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -43,7 +49,7 @@ class LoginRoute extends StatelessWidget {
                 Container(
                   height: size.height * 0.1,
                   width: size.width,
-                  margin: const EdgeInsets.only(right: 20, top: 10),
+                  margin: const EdgeInsets.only(right: 20),
                   child: const Text(
                     "Login",
                     textAlign: TextAlign.right,
@@ -78,6 +84,7 @@ class LoginRoute extends StatelessWidget {
                   ),
                   margin: const EdgeInsets.only(top: 10, bottom: 15),
                   child: const TextField(
+                    //controller: emailTE,
                     decoration: InputDecoration(
                       isDense: true, // used to size(height) textField
                       contentPadding:
@@ -88,6 +95,8 @@ class LoginRoute extends StatelessWidget {
                       ),
                       hintText: "Email",
                     ),
+                    //controller: email,
+                    //controller: the_email,
                   ),
                 ),
                 Container(
@@ -106,6 +115,7 @@ class LoginRoute extends StatelessWidget {
                     ],
                   ),
                   child: const TextField(
+                    // controller: passwordTE,
                     decoration: InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.all(11),
@@ -113,6 +123,9 @@ class LoginRoute extends StatelessWidget {
                       icon: Icon(Icons.password_sharp),
                       hintText: "Password",
                     ),
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    obscureText: true,
                   ),
                 ),
                 Container(

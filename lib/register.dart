@@ -10,6 +10,7 @@ class RegisterRoute extends StatefulWidget {
 class _RegisterRouteState extends State<RegisterRoute> {
   @override
   Widget build(BuildContext context) {
+    //TextEditingController emailTE = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -123,6 +124,7 @@ class _RegisterRouteState extends State<RegisterRoute> {
                         isDense: true,
                         contentPadding: EdgeInsets.all(8),
                       ),
+                      //controller: emailTE,
                     ),
                   ),
                   Container(
@@ -183,6 +185,9 @@ class _RegisterRouteState extends State<RegisterRoute> {
                         isDense: true,
                         contentPadding: EdgeInsets.all(8),
                       ),
+                      obscureText: true,
+                      autocorrect: false,
+                      enableSuggestions: false,
                     ),
                   ),
                   InkWell(
