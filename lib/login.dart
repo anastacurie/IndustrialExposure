@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:industrial_exposure/dashboard.dart';
+import './register.dart';
 
 class LoginRoute extends StatefulWidget {
   const LoginRoute({Key? key}) : super(key: key);
@@ -8,7 +10,8 @@ class LoginRoute extends StatefulWidget {
 }
 
 class _LoginRouteState extends State<LoginRoute> {
-  TextEditingController email = TextEditingController();
+  TextEditingController emailTE = TextEditingController();
+  TextEditingController passTE = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,9 +86,9 @@ class _LoginRouteState extends State<LoginRoute> {
                     ],
                   ),
                   margin: const EdgeInsets.only(top: 10, bottom: 15),
-                  child: const TextField(
-                    //controller: emailTE,
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: emailTE,
+                    decoration: const InputDecoration(
                       isDense: true, // used to size(height) textField
                       contentPadding:
                           EdgeInsets.all(11), // used to size(height) textField
@@ -95,8 +98,6 @@ class _LoginRouteState extends State<LoginRoute> {
                       ),
                       hintText: "Email",
                     ),
-                    //controller: email,
-                    //controller: the_email,
                   ),
                 ),
                 Container(
@@ -114,9 +115,9 @@ class _LoginRouteState extends State<LoginRoute> {
                           spreadRadius: -3),
                     ],
                   ),
-                  child: const TextField(
-                    // controller: passwordTE,
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: passTE,
+                    decoration: const InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.all(11),
                       enabledBorder: InputBorder.none,
@@ -137,7 +138,23 @@ class _LoginRouteState extends State<LoginRoute> {
                 ),
                 InkWell(
                   onTap: () {
-                    // print("You Have Clicked The Button");
+                    var email = emailTE.text;
+                    var pass = passTE.text;
+                    if ((email == "curie@gmail.com") && (pass == "123")) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DashboadRoute(),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterRoute(),
+                        ),
+                      );
+                    }
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(

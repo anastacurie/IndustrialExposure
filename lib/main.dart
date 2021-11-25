@@ -8,6 +8,6 @@ import './try_login.dart';
 void main() => runApp(
       const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: TryLogin(),
+        home: SplashRoute(),
       ),
     );

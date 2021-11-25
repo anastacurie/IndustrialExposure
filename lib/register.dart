@@ -10,7 +10,10 @@ class RegisterRoute extends StatefulWidget {
 class _RegisterRouteState extends State<RegisterRoute> {
   @override
   Widget build(BuildContext context) {
-    //TextEditingController emailTE = TextEditingController();
+    TextEditingController nameTE = TextEditingController();
+    TextEditingController emailTE = TextEditingController();
+    TextEditingController phoneTE = TextEditingController();
+    TextEditingController passTE = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -86,8 +89,9 @@ class _RegisterRouteState extends State<RegisterRoute> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: nameTE,
+                      decoration: const InputDecoration(
                         enabledBorder: InputBorder.none,
                         icon: Icon(Icons.person),
                         hintText: "Fullname",
@@ -116,8 +120,9 @@ class _RegisterRouteState extends State<RegisterRoute> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: emailTE,
+                      decoration: const InputDecoration(
                         enabledBorder: InputBorder.none,
                         icon: Icon(Icons.mail),
                         hintText: "Email",
@@ -147,8 +152,9 @@ class _RegisterRouteState extends State<RegisterRoute> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: phoneTE,
+                      decoration: const InputDecoration(
                         enabledBorder: InputBorder.none,
                         icon: Icon(Icons.phone),
                         hintText: "Phone Number",
@@ -177,8 +183,9 @@ class _RegisterRouteState extends State<RegisterRoute> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: passTE,
+                      decoration: const InputDecoration(
                         enabledBorder: InputBorder.none,
                         icon: Icon(Icons.password_rounded),
                         hintText: "Password",
