@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:industrial_exposure/dashboard.dart';
+import 'package:http/http.dart' as http;
 import './register.dart';
 
 class LoginRoute extends StatefulWidget {
@@ -12,6 +15,32 @@ class LoginRoute extends StatefulWidget {
 class _LoginRouteState extends State<LoginRoute> {
   TextEditingController emailTE = TextEditingController();
   TextEditingController passTE = TextEditingController();
+  Future userLogin() async {
+    String email = emailTE.text;
+    String password = passTE.text;
+    var url = "http://192.168.239.84/ie_api/login_register/login.php";
+    var data = {"email": email, "password": password};
+    var response = await http.post(Uri.parse(url), body: json.encode(data));
+    var login_message = jsonDecode(response.body);
+    print(login_message);
+    if (login_message["error"] == false) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DashboadRoute(),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegisterRoute(),
+        ),
+      );
+    }
+    //print("Hello");
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -138,23 +167,7 @@ class _LoginRouteState extends State<LoginRoute> {
                 ),
                 InkWell(
                   onTap: () {
-                    var email = emailTE.text;
-                    var pass = passTE.text;
-                    if ((email == "curie@gmail.com") && (pass == "123")) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const DashboadRoute(),
-                        ),
-                      );
-                    } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterRoute(),
-                        ),
-                      );
-                    }
+                    userLogin();
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
