@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:industrial_exposure/dashboard.dart';
 import 'package:http/http.dart' as http;
@@ -7,7 +7,6 @@ import './register.dart';
 
 class LoginRoute extends StatefulWidget {
   const LoginRoute({Key? key}) : super(key: key);
-
   @override
   _LoginRouteState createState() => _LoginRouteState();
 }
@@ -16,14 +15,19 @@ class _LoginRouteState extends State<LoginRoute> {
   TextEditingController emailTE = TextEditingController();
   TextEditingController passTE = TextEditingController();
   Future userLogin() async {
+    final prefs=await SharedPreferences.getInstance();
     String email = emailTE.text;
     String password = passTE.text;
-    var url = "http://192.168.239.84/ie_api/login_register/login.php";
+    var url = "http://192.168.240.84/ie_api/login_register/login.php";
     var data = {"email": email, "password": password};
     var response = await http.post(Uri.parse(url), body: json.encode(data));
-    var login_message = jsonDecode(response.body);
-    print(login_message);
+    var login_message = json.decode(response.body);
+    //print(login_message);
+    //print(login_message["phone"].toString());
     if (login_message["error"] == false) {
+      prefs.setString("email", login_message["email"]);
+      prefs.setString("phone", login_message["phone"]);
+      //print(prefs.getString("email"));
       Navigator.push(
         context,
         MaterialPageRoute(

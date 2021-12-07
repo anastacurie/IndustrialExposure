@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:industrial_exposure/login.dart';
 
 class RegisterRoute extends StatefulWidget {
   const RegisterRoute({Key? key}) : super(key: key);
@@ -8,12 +12,38 @@ class RegisterRoute extends StatefulWidget {
 }
 
 class _RegisterRouteState extends State<RegisterRoute> {
+  TextEditingController nameTE = TextEditingController();
+  TextEditingController emailTE = TextEditingController();
+  TextEditingController phoneTE = TextEditingController();
+  TextEditingController passTE = TextEditingController();
+  String url = "http://192.168.240.84/ie_api/login_register/register.php";
+  Future registerUser() async {
+    String name = nameTE.text;
+    String phone = phoneTE.text;
+    String email = emailTE.text;
+    String password = passTE.text;
+    var data = {
+      "name": name,
+      "phone": phone,
+      "email": email,
+      "password": password
+    };
+    var res=await http.post(Uri.parse(url),body: jsonEncode(data));
+    print(res.body);
+    var data_json=jsonDecode(res.body);
+    //var response
+    if(data_json['error']==false)
+      {
+        //print("Login");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginRoute(),),);
+      }
+    else
+      {
+        print("Register");
+      }
+  }
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameTE = TextEditingController();
-    TextEditingController emailTE = TextEditingController();
-    TextEditingController phoneTE = TextEditingController();
-    TextEditingController passTE = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -198,6 +228,7 @@ class _RegisterRouteState extends State<RegisterRoute> {
                     ),
                   ),
                   InkWell(
+                    onTap: (){registerUser();},
                     child: Container(
                       margin: EdgeInsets.symmetric(
                         vertical: 60,
@@ -218,6 +249,7 @@ class _RegisterRouteState extends State<RegisterRoute> {
                           ],
                         ),
                       ),
+
                       child: const Center(
                         child: Text(
                           "REGISTER",

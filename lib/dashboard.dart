@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import './constants.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+String new_email='';
 class DashboadRoute extends StatefulWidget {
   const DashboadRoute({Key? key}) : super(key: key);
-
   @override
   _DashboardRouteState createState() => _DashboardRouteState();
 }
-
 class _DashboardRouteState extends State<DashboadRoute> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    getData();
+    super.initState();
+  }
+  String new_email="";
+  String new_phone="";
+  Future getData() async{
+    SharedPreferences preff=await SharedPreferences.getInstance();
+    String email=preff.getString("email").toString();
+    String phone=preff.getString("phone").toString();
+    setState(() {
+      new_email=email;
+      new_phone=phone;
+    });
+    //print(new_email);
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,8 +55,8 @@ class _DashboardRouteState extends State<DashboadRoute> {
               width: size.width,
               child: Column(
                 children: [
-                  const Text(
-                    "SHEMA Ally Blaise",
+                   Text(
+                    "SHEMA Ally Blaise: ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -75,7 +92,7 @@ class _DashboardRouteState extends State<DashboadRoute> {
                       color: Colors.white,
                     ),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.phone,
                           color: aGreen,
@@ -83,7 +100,7 @@ class _DashboardRouteState extends State<DashboadRoute> {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            "+250785753712",
+                            new_phone,
                             style: TextStyle(fontSize: 18, color: aGreen),
                           ),
                         )
@@ -103,7 +120,7 @@ class _DashboardRouteState extends State<DashboadRoute> {
                       color: Colors.white,
                     ),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.mail,
                           color: aGreen,
@@ -111,7 +128,7 @@ class _DashboardRouteState extends State<DashboadRoute> {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            "allyblaise@yahoo.co.uk",
+                            new_email,
                             style: TextStyle(fontSize: 18, color: aGreen),
                           ),
                         )
